@@ -431,6 +431,7 @@ void IwyuPreprocessorInfo::MaybeProtectInclude(
   // in HandleComment?
   if (LineHasText(includer_loc, "// IWYU pragma: keep") ||
       LineHasText(includer_loc, "/* IWYU pragma: keep") ||
+      LineHasText(includer_loc, ".cpp.inc") || // Treat cpp.inc file as keeped
       HasOpenBeginKeep(includer)) {
     protect_reason = "pragma_keep";
     FileInfoFor(includer)->ReportKnownDesiredFile(includee);
@@ -442,6 +443,7 @@ void IwyuPreprocessorInfo::MaybeProtectInclude(
 
   } else if (LineHasText(includer_loc, "// IWYU pragma: export") ||
              LineHasText(includer_loc, "/* IWYU pragma: export") ||
+             LineHasText(includer_loc, ".h.inc") || // Treat h.inc file as exported
              HasOpenBeginExports(includer)) {
     protect_reason = "pragma_export";
     const string includer_path = GetFilePath(includer);

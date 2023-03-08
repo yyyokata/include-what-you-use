@@ -3941,9 +3941,11 @@ class IwyuAstConsumer
   //   using namespace a;
   //   ...
   bool VisitUsingDirectiveDecl(clang::UsingDirectiveDecl *decl) {
-    if (CanIgnoreCurrentASTNode())  return true;
-    ReportDeclUse(CurrentLoc(), decl->getNominatedNamespaceAsWritten());
-    return Base::VisitUsingDirectiveDecl(decl);
+    return true;
+    // Abandoned namespace check.
+//    if (CanIgnoreCurrentASTNode())  return true;
+//    ReportDeclUse(CurrentLoc(), decl->getNominatedNamespaceAsWritten());
+//    return Base::VisitUsingDirectiveDecl(decl);
   }
 
   // If you say 'typedef Foo Bar', then clients can use Bar however
