@@ -225,4 +225,12 @@ bool IsSystemIncludeFile(const string& filepath) {
   return ConvertToQuotedInclude(filepath)[0] == '<';
 }
 
+bool VagueMatch(const string &path_a, const string &path_b) {
+  if (!IsQuotedInclude(path_a) || !IsQuotedInclude(path_b)) {
+    // just return;
+    return false;
+  }
+  return path_a.substr(1, path_a.size() - 2) == path_b.substr(1, path_b.size() - 2);
+}
+
 }  // namespace include_what_you_use

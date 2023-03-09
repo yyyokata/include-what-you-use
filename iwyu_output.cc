@@ -21,7 +21,6 @@
 #include "iwyu_globals.h"
 #include "iwyu_include_picker.h"
 #include "iwyu_location_util.h"
-#include "iwyu_path_util.h"
 #include "iwyu_preprocessor.h"  // IWYU pragma: keep
 #include "iwyu_stl_util.h"
 #include "iwyu_string_util.h"

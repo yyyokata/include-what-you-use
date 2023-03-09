@@ -21,6 +21,7 @@
 #include <string>                       // for string, operator<
 #include <vector>                       // for vector
 
+#include "iwyu_path_util.h"
 #include "iwyu_port.h"  // for CHECK_
 #include "iwyu_stl_util.h"
 #include "iwyu_use_flags.h"
@@ -148,7 +149,7 @@ class OneIncludeOrForwardDeclareLine {
   }
 
   bool matches(const string& quoted_include) const {
-    return IsIncludeLine() && (quoted_include_ == quoted_include);
+    return IsIncludeLine() && (VagueMatch(quoted_include, quoted_include_) || (quoted_include_ == quoted_include));
   }
 
   bool matches(const clang::NamedDecl* decl) const {

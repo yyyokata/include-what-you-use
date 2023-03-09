@@ -88,6 +88,14 @@ bool IsQuotedInclude(const string& s);
 // file, based on where it lives.
 bool IsSystemIncludeFile(const string& filepath);
 
+// A vague match function for match system quoted path and user quoted path.
+// Due to bazel's -isystem/-iquote behaviour, sometimes iwyu will
+// suggest user to include <a.h> even file header "a.h" is already included
+// (or to the opposite), slightly change the rule of
+// OneIncludeOrForwardDeclareLine::match() by using this function.
+// Maybe write a script to change compile_commands.json gen from bazel
+// is an alternative solution.
+bool VagueMatch(const string &path_a, const string &path_b);
 }  // namespace include_what_you_use
 
 #endif  // INCLUDE_WHAT_YOU_USE_IWYU_PATH_UTIL_H_
